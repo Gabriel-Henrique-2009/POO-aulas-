@@ -1,0 +1,15 @@
+x = input('Digite aqui o mes do ano e descubra em qual trimestre ele está:')
+match x:
+ case 1: print("O mês de janeiro é do 1 trimestre do ano")
+ case 2: print("O mês de fevereiro é do 1 trimestre do ano")
+ case 3: print("O mês de março é do 1 trimestre do ano")
+ case 4: print("O mês de abril é do 2 trimestre do ano")
+ case 5: print("O mês de maio é do 2 trimestre do ano")
+ case 6: print("O mês de junho é do 2 trimestre do ano")
+ case 7: print("O mês de julho é do 3 trimestre do ano")
+ case 8: print("O mês de agosto é do 3 trimestre do ano")
+ case 9: print("O mês de setembro é do 3 trimestre do ano")
+ case 10: print("O mês de outubr é do 4 trimestre do ano")
+ case 11: print("O mês de novembro é do 4 trimestre do ano")
+ case 12: print("O mês de desembro é do 4 trimestre do ano")
+
