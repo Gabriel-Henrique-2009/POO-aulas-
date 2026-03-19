@@ -10,3 +10,4 @@ for i in range(4):
             print(lista[0])
             print(lista[3])
             print(f"isso é que é soma {lista[1] + lista[2]}")
+            print
