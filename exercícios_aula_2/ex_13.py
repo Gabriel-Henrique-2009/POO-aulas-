@@ -1,8 +1,9 @@
-import math
+def RemoverEspacos(texto):
+    recorte = texto.split()
+    frase = "".join(recorte)
+    texto = frase[::1]
+    return texto
 
-def diagonal(b, h):
-    diagonal_qu = b ** 2 + h ** 2
-    diagonal = math.sqrt(diagonal_qu)
-    return diagonal
+a = input('escreva aqui: ')
+print(RemoverEspacos(a))
 
-print(diagonal(3, 4))

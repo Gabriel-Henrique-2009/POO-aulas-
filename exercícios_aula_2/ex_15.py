@@ -1,8 +1,15 @@
-import math
+def Primo(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
 
-def diagonal(b, h):
-    diagonal_qu = b ** 2 + h ** 2
-    diagonal = math.sqrt(diagonal_qu)
-    return diagonal
+n = int(input('Número: '))
 
-print(diagonal(3, 4))
+if Primo(n):
+    print('É primo')
+else: 
+    print('Não é primo')
+
