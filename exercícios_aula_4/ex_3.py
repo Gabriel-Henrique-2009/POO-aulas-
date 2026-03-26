@@ -1,17 +1,8 @@
-class maior:
-    def __init__(self, a, b):
-        self.valor_a = a
-        self.valor_b = b    
+def soma(frase):
+    soma = 0
+    for c in frase:
+        if c.isdigit():
+            soma += int(c)
+    return soma
 
-    def calc(self):
-        if self.valor_a == self.valor_b:
-            return "valor igual"
-        else:
-            return max(self.valor_a, self.valor_b)
-            
-
-m = maior(int(input()), int(input()))  
-print(m.calc()) 
- 
-o = maior(int(input()), int(input()))  
-print(o.calc())  
+print(soma(input("Digite uma frase: ")))
