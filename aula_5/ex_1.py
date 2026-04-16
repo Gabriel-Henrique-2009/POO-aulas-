@@ -49,17 +49,17 @@ class Viagem:
 class Conta_Bancaria:
     def __init__(self):
         self.__nome = str
-        self.__num_conta = 0.0
+        self.__numero_conta = 0.0
         self.__saldo = 0.0
     def set_nome(self, nome):
         self.__nome = nome
     def get_nome(self):
         return self.__nome    
-    def set_num_conta(self, v):
-        if v >= 0: self.__num_conta = v
+    def set_numero_conta(self, v):
+        if v >= 0: self.__numero_conta = v
         else: raise ValueError()
-    def get_num_conta(self):
-        return self.__num_conta    
+    def get_numero_conta(self):
+        return self.__numero_conta    
     def set_saldo(self, v):
         if v >= 0: self.__saldo = v
         else: raise ValueError()
@@ -170,7 +170,7 @@ class UI:
         operacao = input('Digite "d" para depositar ou "s" para sacar algum valor: ').lower().strip()
         valor = float(input("Digite o valor: "))
         metodos = x.metodos(operacao, valor)
-        print(f"Conta Bancaria de {x.get_nome()} cujo numero da conta é {x.get_num_conta()} tinha o saldo de {x.get_saldo():.2f} mas agora tem o saldo de {metodos:.2f}")
+        print(f"Conta Bancaria de {x.get_nome()} cujo numero da conta é {x.get_numero_conta()} tem o saldo de {x.get_saldo():.2f} reais com a odificação de {metodos:.2f} reais")
 
     @staticmethod
     def ingresso():
