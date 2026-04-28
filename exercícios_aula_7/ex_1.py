@@ -106,7 +106,9 @@ class UI:
         x = Retangulo(h, b)
         area = x.calc_area()
         diagonal = x.calc_diagonal()
-        print(f"Um retângulo com base {x.get_base()} e altura {x.get_altura()} tem área = {area:.2f} e tem diagonal = {diagonal:.2f}")
+        string = x.__str__
+        print(f"Um retangulo com as seguintes características: {string}")
+        print(f"Tem área = {area:.2f} e tem diagonal = {diagonal:.2f}")
 
     def frete():
         print("Cálculo do frete")
@@ -114,18 +116,22 @@ class UI:
         d = float(input("Informe o valor da distância em kilometros: "))
         x = Frete(p, d)
         frete = x.calc_frete()
-        print(f"Uma viagem de {x.get_distancia()} km's e trasportando o peso de {x.get_peso()} tem o frete = {frete:.2f} reais")
+        string = x.__str__
+        print(f"Um frete com as seguintes características: {string}")
+        print(f"Tem o frete = {frete:.2f} reais")
 
     def equacao():
-        print("Cálculo do frete")
+        print("Cálculo da equação")
         a = float(input("Valor de a: "))
         b = float(input("Valor de b: "))
         c = float(input("Valor de c: "))
         x = float(input("Valor de x: "))
         x = Equa_segundo_grau(a, b, c, x)
-        frete = x.calc_frete()
-        frete = x.calc_frete()
-        frete = x.calc_frete()
-        frete = x.calc_frete()
-        print(f"Uma viagem de {x.get_distancia()} km's e trasportando o peso de {x.get_peso()} tem o frete = {frete:.2f} reais")
+        delta = x.delta()
+        raiz_real = x.tem_raiz_real()
+        raiz1 = x.raiz1()
+        raiz2 = x.raiz2()
+        string = x.__str__
+        print(f"a equação do segundo grau com {string}")
+        print(f"Tem delta = {delta}. Possui raiz real? {raiz_real}. A raiz um é {raiz1} e a raiz 2 é {raiz2}")
 UI.main()
