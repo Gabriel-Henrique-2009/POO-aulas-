@@ -1,137 +1,107 @@
-from this import d
-
-
 class Retangulo:
     def __init__(self, h, b):
         self.set_base(b)
         self.set_altura(h)
     def set_base(self, v):
-        if v >=0 : self.__b = v
-        else: raise ValueError()
+        if v >= 0: self.__b = v
+        else: raise ValueError("Base não pode ser negativa")
     def set_altura(self, v):
         if v >= 0: self.__h = v
-        else: raise ValueError()
-    def get_base(self):
-        return self.__b
-    def get_altura(self):
-        return self.__h
-    def calc_area(self):
-        return self.__b * self.__h
-    def calc_diagonal(self):
-        return (self.__b ** 2 + self.__h ** 2) ** 0.5
-    def __str__(self):
-        return f"Base = {self.__b} - Altura = {self.__h}"
+        else: raise ValueError("Altura não pode ser negativa")
+    def get_base(self): return self.__b
+    def get_altura(self): return self.__h
+    def calc_area(self): return self.__b * self.__h
+    def calc_diagonal(self): return (self.__b ** 2 + self.__h ** 2) ** 0.5
+    def __str__(self): return f"Base = {self.__b} - Altura = {self.__h}"
 
 class Frete:
     def __init__(self, p, d):
         self.set_peso(p)
         self.set_distancia(d)
     def set_peso(self, v):
-        if v >=0 : self.__p = v
-        else: raise ValueError()
+        if v >= 0: self.__p = v
+        else: raise ValueError("Peso não pode ser negativo")
     def set_distancia(self, v):
         if v >= 0: self.__d = v
-        else: raise ValueError()
-    def get_peso(self):
-        return self.__p
-    def get_distancia(self):
-        return self.__d
-    def calc_frete(self):
-        return (0.01 * self.__p) * self.__d
-    def __str__(self):
-        return f"Peso (em kg) = {self.__p} - distancia (em km) = {self.__d}"
+        else: raise ValueError("Distância não pode ser negativa")
+    def calc_frete(self): return (0.01 * self.__p) * self.__d
+    def __str__(self): return f"Peso = {self.__p}kg - Distância = {self.__d}km"
 
 class Equa_segundo_grau:
-    def __init__(self, a, b, c, x):
+    def __init__(self, a, b, c):
         self.set_a(a)
         self.set_b(b)
         self.set_c(c)
-        self.set_x(x)
 
     def set_a(self, v):
-        if v > 0 or v < 0 : self.__a = v
-        else: raise ValueError()
-
-    def set_b(self, v):
-        if v >= 0 or v < 0: self.__b = v
-
-    def set_c(self, v):
-        if v >= 0 or v < 0: self.__c = v
-
-    def set_x(self, v):
-        if v >= 0 or v < 0: self.__x = v
-
+        if v != 0: self.__a = v
+        else: raise ValueError("O coeficiente 'a' não pode ser zero.")
+    def set_b(self, v): self.__b = v
+    def set_c(self, v): self.__c = v
 
     def delta(self):
         return self.__b ** 2 - 4 * self.__a * self.__c
 
     def tem_raiz_real(self):
-        raiz_real = True
-        delta = Equa_segundo_grau.delta
-        if delta < 0: raiz_real = False
-        return raiz_real
+        if self.delta() >= 0: return True
+        else: return False
 
     def raiz1(self):
-        delta = Equa_segundo_grau.delta
-        return ((-1 * self.__b) + delta ** 0.5) / 4 * self.__a
+        if not self.tem_raiz_real(): return None
+        return (-self.__b + self.delta() ** 0.5) / (2 * self.__a)
 
     def raiz2(self):
-        delta = Equa_segundo_grau.delta
-        return ((-1 * self.__b) - delta ** 0.5) / 4 * self.__a
+        if not self.tem_raiz_real(): return None
+        return (-self.__b - self.delta() ** 0.5) / (2 * self.__a)
 
     def __str__(self):
-        return f"a = {self.__a}, b = {self.__b}, c = {self.__c} e x = {self.__x}"
-    
+        return f"{self.__a}x² + {self.__b}x + {self.__c} = 0"
+
 class UI:
     @staticmethod
     def main():
         op = 0
-        while op != 9:
+        while op != 4:
             op = UI.menu()
             if op == 1: UI.retangulo()
-            if op == 2: UI.frete()
-            if op == 3: UI.equacao()
+            elif op == 2: UI.frete()
+            elif op == 3: UI.equacao()
 
     @staticmethod
     def menu():
-        print("1-Retângulo, 2-Frete, 3-Equação do segundo grau e 4-Fim")
-        op = int(input("Informe uma opção: "))
-        return op    
+        print("\n1-Retângulo, 2-Frete, 3-Equação, 4-Fim")
+        return int(input("Informe uma opção: "))
 
     @staticmethod
     def retangulo():
-        print("Cálculo da área do retangulo")
-        h = float(input("Informe o valor da base: "))
-        b = float(input("Informe o valor da altura: "))
-        x = Retangulo(h, b)
-        area = x.calc_area()
-        diagonal = x.calc_diagonal()
-        string = x.__str__
-        print(f"Um retangulo com as seguintes características: {string}")
-        print(f"Tem área = {area:.2f} e tem diagonal = {diagonal:.2f}")
+        h = float(input("Base: "))
+        b = float(input("Altura: "))
+        obj = Retangulo(h, b)
+        print(f"{obj}")
+        print(f"Área: {obj.calc_area():.2f} | Diagonal: {obj.calc_diagonal():.2f}")
 
+    @staticmethod
     def frete():
-        print("Cálculo do frete")
-        p = float(input("Informe o valor do peso em kilos: "))
-        d = float(input("Informe o valor da distância em kilometros: "))
-        x = Frete(p, d)
-        frete = x.calc_frete()
-        string = x.__str__
-        print(f"Um frete com as seguintes características: {string}")
-        print(f"Tem o frete = {frete:.2f} reais")
+        p = float(input("Peso (kg): "))
+        d = float(input("Distância (km): "))
+        obj = Frete(p, d)
+        print(f"{obj}")
+        print(f"Valor do Frete: R$ {obj.calc_frete():.2f}")
 
+    @staticmethod
     def equacao():
-        print("Cálculo da equação")
         a = float(input("Valor de a: "))
         b = float(input("Valor de b: "))
         c = float(input("Valor de c: "))
-        x = float(input("Valor de x: "))
-        x = Equa_segundo_grau(a, b, c, x)
-        delta = x.delta()
-        raiz_real = x.tem_raiz_real()
-        raiz1 = x.raiz1()
-        raiz2 = x.raiz2()
-        string = x.__str__
-        print(f"a equação do segundo grau com {string}")
-        print(f"Tem delta = {delta}. Possui raiz real? {raiz_real}. A raiz um é {raiz1} e a raiz 2 é {raiz2}")
+        eq = Equa_segundo_grau(a, b, c)
+        d = eq.delta()
+        print(f"Equação: {eq}")
+        print(f"Delta: {d}")
+        if eq.tem_raiz_real() == True:
+            print("Raizes reais: True")
+            print(f"Raiz 1: {eq.raiz1():.2f}")
+            print(f"Raiz 2: {eq.raiz2():.2f}")
+        else:
+            print("Possui raízes reais: False")
+
 UI.main()
