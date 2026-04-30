@@ -104,4 +104,4 @@ class UI:
         else:
             print("Possui raízes reais: False")
 
-UI.main()
+UI.main()  
