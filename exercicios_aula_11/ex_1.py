@@ -25,10 +25,9 @@ alfabeto = {"a": "a",
 "x": "xuz",
 "z": "zuz"}
 
-codigo = ""
 letra = ""
 for l in entrada:
-    letra = alfabeto[l]
-    codigo = codigo + "" + letra
-print(codigo)
+    letra += alfabeto[l]
+
+print(letra)
     
