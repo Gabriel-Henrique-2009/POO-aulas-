@@ -1,150 +1,161 @@
 class Time:
-    def __init__(self,id,nome,estadofederacao):
+    def __init__(self, id, nome, estado):
         self.set_id(id)
         self.set_nome(nome)
-        self.set_estadofederacao(estadofederacao)
+        self.set_estado(estado)
+
     def set_id(self, id):
-        if id >= 0:
-            self.id = id
-        else:
-            raise ValueError("ID inválido")        
+        self.id = id
+
     def set_nome(self, nome):
-        if nome != "":
-            self.nome = nome
-        else:
-            raise ValueError("Nome inválido")
-    def set_estadofederacao(self,estadofederacao):
-        if estadofederacao != "":
-            self.estadofederacao = estadofederacao
-        else:
-            raise ValueError("Estado federativo inválido")
+        self.nome = nome
+
+    def set_estado(self, estado):
+        self.estado = estado
+
     def get_id(self):
         return self.id
+
     def get_nome(self):
         return self.nome
-    def get_estadofederacao(self):
-        return self.estadofederacao
+
+    def get_estado(self):
+        return self.estado
+
     def __str__(self):
-        return f"ID = {self.id} - Nome = {self.nome} - Estado federativo = {self.estadofederacao}"
+        return f"ID: {self.id} - Time: {self.nome} - UF: {self.estado}"
 
 class Jogador:
-    def __init__(self,id,nome,camisa,idtime):
+    def __init__(self, id, idTime, nome, camisa):
         self.set_id(id)
+        self.set_idTime(idTime)
         self.set_nome(nome)
         self.set_camisa(camisa)
-        self.set_idtime(idtime)
+
     def set_id(self, id):
-        if id >= 0:
-            self.id = id
-        else:
-            raise ValueError("ID inválido")
-    def set_nome(self,nome):
-        if nome != "":
-            self.nome = nome
-        else:
-            raise ValueError("Nome inválido")
-    def set_camisa(self,camisa):
-        if camisa > 0:
-            self.camisa = camisa
-        else:
-            raise ValueError("Número da camisa inválido")
-    def set_idtime(self,idtime):
-        if idtime >= 0:
-            self.idtime = idtime
-        else:
-            raise ValueError("ID do time inválido")
+        self.id = id
+
+    def set_idTime(self, idTime):
+        self.idTime = idTime
+
+    def set_nome(self, nome):
+        self.nome = nome
+
+    def set_camisa(self, camisa):
+        self.camisa = camisa
+
     def get_id(self):
         return self.id
+
+    def get_idTime(self):
+        return self.idTime
+
     def get_nome(self):
         return self.nome
+
     def get_camisa(self):
         return self.camisa
-    def get_idioma(self):
-        return self.idioma
+
     def __str__(self):
-        return f"ID = {self.id} - Nome = {self.nome}" 
+        return f"ID: {self.id} - Nome: {self.nome} - N°: {self.camisa} - Time ID: {self.idTime}"
 
 class UI:
-    times = []   # atributo de classe - é uma lista de contatos
+    times = []
     jogadores = []
-    @staticmethod
-    def main():
-        op_1 = 0
-        op_t = 0
-        op_j = 0
-        while op_1 != 5:
-            op_1 = UI.menu()
-            if op_1 == 1: UI.time()   # C reate
-            if op_1 == 2: UI.jogador()    # R ead
-            if op_1 == 3: UI.lista_jogador() # U pdate
-            if op_1 == 4: UI.transferencia()   # D elete
 
-            # op_1 = UI.menu()
-            # if op_1 == 1: UI.inserir()   # C reate
-            # if op_1 == 2: UI.listar()    # R ead
-            # if op_1 == 3: UI.atualizar() # U pdate
-            # if op_1 == 4: UI.excluir()   # D elete
-            # if op_1 == 5: UI.pesquisar()
-            
+    @classmethod
+    def main(cls):
+        op = 0
+        while op != 10:
+            op = cls.menu()
+            if op == 1: cls.inserir_time()
+            if op == 2: cls.listar_time()
+            if op == 3: cls.atualizar_time()
+            if op == 4: cls.excluir_time()
+            if op == 5: cls.inserir_jogador()
+            if op == 6: cls.listar_jogador()
+            if op == 7: cls.atualizar_jogador()
+            if op == 8: cls.excluir_jogador()
+            if op == 9: cls.listar_jogadores_do_time()
+            if op == 10: cls.transferir_jogador()
+
     @staticmethod
     def menu():
-        print("1-Times      2-Jogadores     3-listar jogadores      4-Transferencia     5-Fim")
-        return int(input("Escolha um opção: "))
 
-    def menu_times():
-        print("1-Inserir    2-Listar    3-Atualizar     4-Excluir       5-Fim")
-        return int(input("Escolha um opção: "))
+        print("1-Inserir Time")
+        print("2-Listar Times")
+        print("3-Atualizar Time")
+        print("4-Excluir Time")
+        print("5-Inserir Jogador")
+        print("6-Listar Jogadores")
+        print("7-Atualizar Jogador")
+        print("8-Excluir Jogador")
+        print("9-Listar Jogadores de um Time")
+        print("10-Transferir Jogador")
+        print("11-Sair")
+        return int(input("Escolha uma opção: "))
 
-    def menu_jogadores():
-        print("1-Inserir    2-Listar    3-Atualizar     4-Excluir       5-Fim")
-        return int(input("Escolha um opção: "))
+    @classmethod
+    def inserir_time(cls):
+        id = int(input("ID do time: "))
+        nome = input("Nome do time: ")
+        estado = input("Estado (UF): ")
+        cls.times.append(Time(id, nome, estado))
 
     @classmethod
-    def inserir(cls):
-        id = int(input("Informe o id do contato: "))
-        nome = input("Informe o nome: ")
-        email = input("Informe o e-mail: ")
-        fone = input("Informe o telefone: ")
-        x = Contato(id, nome, email, fone)
-        cls.contatos.append(x)
-        print("Contato inserido com sucesso")      
-    @classmethod
-    def listar(cls):
-        if len(cls.contatos) == 0: print("Nenhum contato na agenda")
-        else:
-            for x in cls.contatos: print(x)    
-    @classmethod
-    def listar_id(cls, id):
-        # procurar um contato na lista com o id informado
-        for x in cls.contatos:
-            if x.get_id() == id: return x
-        return None    
-    @classmethod
-    def atualizar(cls):
-        ContatoUI.listar()
-        id = int(input("Informe o id do contato a ser alterado: "))
-        x = ContatoUI.listar_id(id)
-        if x != None:
-            # remove o contato atual
-            cls.contatos.remove(x)
-            # insere um novo contato com os dados atualizados
-            nome = input("Informe o novo nome: ")
-            email = input("Informe o novo e-mail: ")
-            fone = input("Informe o novo telefone: ")
-            x = Contato(id, nome, email, fone)
-            cls.contatos.append(x)            
-    @classmethod
-    def excluir(cls):
-        ContatoUI.listar()
-        id = int(input("Informe o id do contato a ser excluído: "))
-        x = ContatoUI.listar_id(id)
-        if x != None:
-            # remove o contato atual
-            cls.contatos.remove(x)
-    @classmethod
-    def pesquisar(cls):
-        iniciais = input("Informe as iniciais do contato: ")
-        for x in cls.contatos:
-            if x.get_nome().startswith(iniciais): print(x)
+    def listar_time(cls):
+        for t in cls.times: print(t)
 
-ContatoUI.main()    
+    @classmethod
+    def atualizar_time(cls):
+        id = int(input("ID do time para atualizar: "))
+        for t in cls.times:
+            if t.get_id() == id:
+                t.set_nome(input("Novo nome: "))
+                t.set_estado(input("Novo estado: "))
+
+    @classmethod
+    def excluir_time(cls):
+        id = int(input("ID do time para excluir: "))
+        cls.times = [t for t in cls.times if t.get_id() != id]
+
+    @classmethod
+    def inserir_jogador(cls):
+        id = int(input("ID do jogador: "))
+        id_t = int(input("ID do time: "))
+        nome = input("Nome do jogador: ")
+        camisa = int(input("Número da camisa: "))
+        cls.jogadores.append(Jogador(id, id_t, nome, camisa))
+
+    @classmethod
+    def listar_jogador(cls):
+        for j in cls.jogadores: print(j)
+
+    @classmethod
+    def atualizar_jogador(cls):
+        id = int(input("ID do jogador para atualizar: "))
+        for j in cls.jogadores:
+            if j.get_id() == id:
+                j.set_nome(input("Novo nome: "))
+                j.set_camisa(int(input("Nova camisa: ")))
+
+    @classmethod
+    def excluir_jogador(cls):
+        id = int(input("ID do jogador para excluir: "))
+        cls.jogadores = [j for j in cls.jogadores if j.get_id() != id]
+
+    @classmethod
+    def listar_jogadores_do_time(cls):
+        id_t = int(input("ID do time para listar jogadores: "))
+        for j in cls.jogadores:
+            if j.get_idTime() == id_t: print(j)
+
+    @classmethod
+    def transferir_jogador(cls):
+        id_j = int(input("ID do jogador a transferir: "))
+        novo_id_t = int(input("ID do novo time: "))
+        for j in cls.jogadores:
+            if j.get_id() == id_j:
+                j.set_idTime(novo_id_t)
+
+UI.main()
