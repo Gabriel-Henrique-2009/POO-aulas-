@@ -107,19 +107,6 @@ class playlistitem:
     def __str__(self):
         return f"Id = {self.__id} - id da playlist = {self.__idplaylist} - Id da música = {self.__idmusica} - Sequência = {self.__sequencia}"
     
-# class UI:
-#     playlist = []
-#     musica = []
-#     itens = []
-#     @staticmethod
-#     def main():
-#         op = 0
-#         while op != 100:
-#             if op == 1: UI.inserir_palylist()
-#             if op == 2: UI.inserir_musica()
-#             if op == 3: UI.inserir_item()
-#             if op == 4: UI.listar_tudo()
-
 class UI:
     playlists = []
     musicas = []
@@ -143,12 +130,17 @@ class UI:
 
     @staticmethod
     def menu():
-        print("1-Inserir Playlist        2-Listar Playlists")
-        print("3-Inserir Música          4-Listar Músicas")
-        print("5-Adicionar Música na PL  6-Ver Músicas de uma PL")
-        print("7-Atualizar Playlist      8-Excluir Playlist")
-        print("9-Atualizar Música        10-Excluir Música")
-        print("11-Sair")
+        print("        1-Inserir Playlist")
+        print("        2-Listar Playlists")
+        print("        3-Inserir Música")
+        print("        4-Listar Músicas")
+        print("        5-Adicionar Música na PL")
+        print("        6-Ver Músicas de uma PL")
+        print("        7-Atualizar Playlist")      
+        print("        8-Excluir Playlist")
+        print("        9-Atualizar Música")        
+        print("        10-Excluir Música")
+        print("        11-Sair")
         print(60*'=')
         return int(input("Escolha uma opção: "))
 
@@ -175,10 +167,8 @@ class UI:
     def excluir_playlist(cls):
         id = int(input("ID da playlist para excluir: "))
         cls.playlists = [p for p in cls.playlists if p.get_id() != id]
-        # Remove também os itens vinculados a essa playlist
         cls.itens = [i for i in cls.itens if i.get_idplaylist() != id]
 
-    # --- Métodos para Música ---
     @classmethod
     def inserir_musica(cls):
         id = int(input("ID da Música: "))
@@ -189,7 +179,7 @@ class UI:
 
     @classmethod
     def listar_musicas(cls):
-        print("\n--- Músicas Cadastradas ---")
+        print("\nMúsicas Cadastradas")
         for m in cls.musicas: print(m)
 
     @classmethod
