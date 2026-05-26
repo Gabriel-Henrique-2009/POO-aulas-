@@ -1,76 +1,62 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
-class Paciente:
-    def __init__(self, id, nome, cpf, t, n):
+class Treino:
+    def __init__(self, id, data, dist, tempo):
         self.set_id(id)
-        self.set_nome(nome)
-        self.set_cpf(cpf)
-        self.set_telefone(t)
-        self.set_nascimento(n)
+        self.set_data(data)
+        self.set_dist(dist)
+        self.set_tempo(tempo)
 
     def set_id(self, id):
         if id < 0: raise ValueError("Valor errado")
         self.__id = id
 
-    def set_nome(self, nome):
-        if nome == "": raise ValueError("Não pode ser vazio")
-        self.__nome = nome
+    def set_data(self, data):
+        if data > datetime.now(): raise ValueError("Não pode ser vazio")
+        self.__data = data
 
-    def set_cpf(self, cpf):
-        if cpf == "": raise ValueError("Não pode ser vazio")
-        self.__cpf = cpf
+    def set_dist(self, dist):
+        if dist < 0: raise ValueError("Não pode ser vazio")
+        self.__dist = dist
 
-    def set_telefone(self, t):
-        if t == "": raise ValueError("Não pode ser vazio")
-        self.__telefone = t
-
-    def set_nascimento(self, n):
-        if n > datetime.now() : raise ValueError("Não pode ter nascido no futuro")
-        self.__nascimento = n
+    def set_tempo(self, tempo):
+        if tempo < 0 : raise ValueError("Não pode ser negativo")
+        self.__tempo = tempo
 
     def get_id(self):
         return self.__id
 
-    def get_nome(self):
-        return self.__nome
+    def get_data(self):
+        return self.__data
 
-    def get_cpf(self):
-        return self.__cpf
+    def get_dist(self):
+        return self.__dist
 
-    def get_telefone(self):
-        return self.__telefone
-
-    def get_nascimento(self):
-        return self.__nascimento
+    def get_tempo(self):
+        return self.__tempo
     
+    def Pace(self):
+        pace = self.__tempo // self.__dist()  
+        return timedelta(seconds=pace)
+
     def __str__(self):
-        return f"- id: {self.__id} -\n- nome: {self.__nome} -\n- cpf: {self.__cpf} -\n- telefone: {self.__telefone} -\n- data de nascimento: {self.__nascimento.strftime('%d/%m/%Y')} -"
+        return f"- id: {self.__id} -\n- data: {self.__data} -\n- distância: {self.__dist} -\n- tempo: {self.__tempo} -"
     
-    def idade(self):
-        tempo = datetime.now() - self.__nascimento
-        ano = tempo.days // 365
-        meses = tempo.days % 365 // 30
-        dia = tempo.days % 365 % 30    
-        return f"- idade: {ano} -\n- meses: {meses} -\n- dia: {dia} -"
 
-# x = Paciente(1, "Eduardo", "001.002.003.45", "84 1234-5678", datetime(2010, 1, 25))
-# print(x)
-# print(x.idade())
-
-class PacienteUI:
-    __paciente = []
+class TreinoUI:
+    __treino = []
 
     @staticmethod
     def main():
         op = 0
         while op != 9:
-            op = PacienteUI.menu()
-            if op == 1: PacienteUI.inserir()
-            if op == 2: PacienteUI.listar()
-            if op == 3: PacienteUI.atualizar()
-            if op == 4: PacienteUI.excluir()
-            if op == 5: PacienteUI.pesquisar()
-            if op == 6: PacienteUI.aniversariante()
+            op = TreinoUI.menu()
+            if op == 1: TreinoUI.inserir()
+            if op == 2: TreinoUI.listar()
+            if op == 3: TreinoUI.atualizar()
+            if op == 4: TreinoUI.excluir()
+            if op == 5: TreinoUI.pesquisar()
+            if op == 6: TreinoUI.aniversariante()
 
     @staticmethod
     def menu():
