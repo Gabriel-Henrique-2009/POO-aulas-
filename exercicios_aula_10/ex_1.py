@@ -81,19 +81,17 @@ class UI:
 
     @staticmethod
     def menu():
-        print("-----TIMES-----")
-        print("1-   Inserir Time")
-        print("2-   Listar Times")
-        print("3-   Atualizar Time")
-        print("4-   Excluir Time" )
-        print("-----JOGA BOLA JOGADOR-----")
-        print("5-   Inserir Jogador")
-        print("6-   Listar Jogadores")
-        print("7-   Atualizar Jogador")
-        print("8-   Excluir Jogador")
-        print("9-   Listar Jogadores de um Time")
-        print("10-  Transferir Jogador")
-        print("11-  Sair")
+        print("1-Inserir Time")
+        print("2-Listar Times")
+        print("3-Atualizar Time")
+        print("4-Excluir Time")
+        print("5-Inserir Jogador")
+        print("6-Listar Jogadores")
+        print("7-Atualizar Jogador")
+        print("8-Excluir Jogador")
+        print("9-Listar Jogadores de um Time")
+        print("10-Transferir Jogador")
+        print("11-Sair")
         return int(input("Escolha uma opção: "))
 
     @classmethod
