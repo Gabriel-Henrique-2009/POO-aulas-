@@ -40,8 +40,9 @@ class Boleto:
         self.__data_pagamento = datetime.now()
 
         if self.__valor_boleto == self.__valor_pago: self.__situacao_pagamento = Pagamento.PAGO
-
         else: self.__situacao_pagamento = Pagamento.PAGO_PARCIAL
+
+        
     def get_cod_barras(self): return self.__cod_barras  
 
     def get_data_emissao(self): return self.__data_emissao   
@@ -56,8 +57,6 @@ class Boleto:
 
     def get_situacao_pagamento(self): return self.__situacao_pagamento
 
-    def situacao(self): return self.__situacao_pagamento
-
     def __str__(self): 
         s = f"Boleto: {self.__cod_barras} - Emissão: {self.__data_emissao.strftime('%d/%m/%Y')}\n"
         s += f"Valor: R$ {self.__valor_boleto:.2f} - Valor Pago: R$ {self.__valor_pago:.2f}\n"
@@ -69,8 +68,8 @@ class Boleto:
     
 class BoletoUI:
     __boletos = []
-    @staticmethod
 
+    @staticmethod
     def main():
         op = 0
         while op != 10:
