@@ -1,9 +1,9 @@
-from models.servico import Servico
+from models.profissional import Profissional
 import json
 
-class ServicoDao:
+class ProfissionalDao:
     def __init__(self):
-        self.__arquivo = "servicos.json"
+        self.__arquivo = "profissionais.json"
         self.__objetos = []
         self.__abrir()
 
@@ -23,10 +23,10 @@ class ServicoDao:
             if obj.get_id() == id: return obj
         return None
 
-    def listar_descricao(self, iniciais):
+    def listar_nome(self, iniciais):
         resultado = []
         for obj in self.__objetos:
-            if obj.get_descricao().lower().startswith(iniciais.lower()):
+            if obj.get_nome().lower().startswith(iniciais.lower()):
                 resultado.append(obj)
         return resultado
 
@@ -50,12 +50,12 @@ class ServicoDao:
             arquivo.close()
             self.__objetos = []
             for dic in list_dic:
-                obj = Servico.from_json(dic)
+                obj = Profissional.from_json(dic)
                 self.__objetos.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):
         arquivo = open(self.__arquivo, mode="w")
-        json.dump(self.__objetos, arquivo, default=Servico.to_json, indent=2)
+        json.dump(self.__objetos, arquivo, default=Profissional.to_json, indent=2)
         arquivo.close()

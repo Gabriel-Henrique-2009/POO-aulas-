@@ -13,7 +13,7 @@ class Servico:
 
     def set_descricao(self, descricao):
         if descricao == "": raise ValueError("Descricao deve ser informada")
-        self.__descricao = nome = descricao
+        self.__descricao = descricao
 
     def set_valor(self, valor):
         if valor < 0: raise ValueError("Valor deve ser positivo")
