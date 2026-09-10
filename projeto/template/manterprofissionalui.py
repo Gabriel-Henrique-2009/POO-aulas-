@@ -5,7 +5,6 @@ from service import Service
 
 
 class ManterProfissionalUI:
-    @staticmethod
     def main():
         st.header("Cadastro de Profissionais")
 
@@ -19,7 +18,6 @@ class ManterProfissionalUI:
         with tab4:
             ManterProfissionalUI.excluir()
 
-    @staticmethod
     def listar():
         profissionais = Service.profissional_listar()
         if len(profissionais) == 0:
@@ -31,7 +29,6 @@ class ManterProfissionalUI:
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
 
-    @staticmethod
     def inserir():
         nome = st.text_input("Informe o nome", key="prof_ins_nome")
         email = st.text_input("Informe o e-mail", key="prof_ins_email")
@@ -43,7 +40,6 @@ class ManterProfissionalUI:
             time.sleep(2)
             st.rerun()
 
-    @staticmethod
     def atualizar():
         profissionais = Service.profissional_listar()
 
@@ -62,7 +58,6 @@ class ManterProfissionalUI:
                 time.sleep(2)
                 st.rerun()
 
-    @staticmethod
     def excluir():
         profissionais = Service.profissional_listar()
 
