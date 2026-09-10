@@ -5,7 +5,6 @@ from datetime import datetime
 from service import Service
 
 class ManterAtendimentoUI:
-    @staticmethod
     def main():
         st.header("Cadastro de Atendimentos")
 
@@ -19,7 +18,6 @@ class ManterAtendimentoUI:
         with tab4:
             ManterAtendimentoUI.excluir()
 
-    @staticmethod
     def listar():
         atendimentos = Service.atendimento_listar()
         if len(atendimentos) == 0:
@@ -31,7 +29,6 @@ class ManterAtendimentoUI:
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
 
-    @staticmethod
     def inserir():
         data = st.text_input("Informe a data e hora (dd/mm/aaaa hh:mm)", datetime.now().strftime("%d/%m/%Y %H:%M"))
         queixa = st.text_input("Informe a queixa principal")
@@ -47,7 +44,6 @@ class ManterAtendimentoUI:
             time.sleep(2)
             st.rerun()
 
-    @staticmethod
     def atualizar():
         atendimentos = Service.atendimento_listar()
 
@@ -70,7 +66,6 @@ class ManterAtendimentoUI:
                 time.sleep(2)
                 st.rerun()
 
-    @staticmethod
     def excluir():
         atendimentos = Service.atendimento_listar()
 

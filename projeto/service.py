@@ -75,3 +75,20 @@ class Service:
     @classmethod
     def horario_excluir(cls, id):
         cls.__horario_dao.excluir(id)
+
+    # Métodos de Atendimento (redirecionados ou stubs)
+    @classmethod
+    def atendimento_listar(cls):
+        return []
+
+    @classmethod
+    def atendimento_inserir(cls, data, queixa, historico, avaliacao, prescricao, id_horario):
+        pass
+
+    @classmethod
+    def atendimento_atualizar(cls, id, data, queixa, historico, avaliacao, prescricao, id_horario):
+        pass
+
+    @classmethod
+    def atendimento_excluir(cls, id):
+        pass
