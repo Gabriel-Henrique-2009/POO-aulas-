@@ -1,14 +1,13 @@
 from models.profissional import Profissional
 import json
 
-class ClienteDAO:
+class ProfissionalDAO:
     def __init__(self):
-        self.__arquivo = "clientes.json"
+        self.__arquivo = "profissionais.json"
         self.__objetos = []
         self.__abrir()
 
     def inserir(self, obj):
-        # gerar um novo id com o maior valor existente mais um
         id = 0
         if len(self.__objetos) > 0:
             for aux in self.__objetos:
@@ -54,4 +53,3 @@ class ClienteDAO:
         arquivo = open(self.__arquivo, mode = "w")
         json.dump(self.__objetos, arquivo, default = Profissional.to_json, indent = 2)
         arquivo.close()
-        

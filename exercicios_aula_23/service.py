@@ -1,7 +1,9 @@
-from models.cliente import Cliente         # entidade
-from models.clientedao import ClienteDAO   # persistência
+from models.cliente import Cliente
+from models.clientedao import ClienteDAO
 from models.servico import Servico
 from models.servicodao import ServicoDAO
+from models.atendimento import Atendimento
+from models.atendimentodao import AtendimentoDAO
 
 class Service:
     @staticmethod
@@ -39,3 +41,21 @@ class Service:
     @staticmethod
     def servico_excluir(id):
         ServicoDAO().excluir(id)
+
+    @staticmethod
+    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        AtendimentoDAO().inserir(obj)
+    @staticmethod
+    def atendimento_listar():
+        return AtendimentoDAO().listar()
+    @staticmethod
+    def atendimento_listar_id(id):
+        return AtendimentoDAO().listar_id(id)
+    @staticmethod
+    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Atendimento(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        AtendimentoDAO().atualizar(obj)
+    @staticmethod
+    def atendimento_excluir(id):
+        AtendimentoDAO().excluir(id)

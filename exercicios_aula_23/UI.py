@@ -1,11 +1,4 @@
-from template.manterclienteui import ManterClienteUI
-
-
-class IndexUI:
-    @staticmethod
-    def main():
-        ManterClienteUI.main()
-
+from index import IndexUI
 
 if __name__ == "__main__":
     IndexUI.main()
