@@ -1,61 +1,77 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDAO
-from models.servico import Servico
-from models.servicodao import ServicoDAO
-from models.atendimento import Atendimento
-from models.atendimentodao import AtendimentoDAO
+from models.horario import Horario
+from models.horariodao import HorarioDAO
 
 class Service:
-    @staticmethod
-    def cliente_inserir(nome, email, fone):
-        obj = Cliente(0, nome, email, fone)
-        ClienteDAO().inserir(obj)
-    @staticmethod
-    def cliente_listar():
-        return ClienteDAO().listar()
-    @staticmethod
-    def cliente_listar_id(id):
-        return ClienteDAO().listar_id(id)
-    @staticmethod
-    def cliente_atualizar(id, nome, email, fone):
-        obj = Cliente(id, nome, email, fone)
-        ClienteDAO().atualizar(obj)
-    @staticmethod
-    def cliente_excluir(id):
-        ClienteDAO().excluir(id)
-    
-    @staticmethod
-    def servico_inserir(descricao, valor):
-        obj = Servico(0, descricao, valor)
-        ServicoDAO().inserir(obj)
-    @staticmethod
-    def servico_listar():
-        return ServicoDAO().listar()
-    @staticmethod
-    def servico_listar_id(id):
-        return ServicoDAO().listar_id(id)
-    @staticmethod
-    def servico_atualizar(id, descricao, valor):
-        obj = Servico(id, descricao, valor)
-        ServicoDAO().atualizar(obj)
-    @staticmethod
-    def servico_excluir(id):
-        ServicoDAO().excluir(id)
+    __horario_dao = HorarioDAO()
 
-    @staticmethod
-    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
-        obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
-        AtendimentoDAO().inserir(obj)
-    @staticmethod
-    def atendimento_listar():
-        return AtendimentoDAO().listar()
-    @staticmethod
-    def atendimento_listar_id(id):
-        return AtendimentoDAO().listar_id(id)
-    @staticmethod
-    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
-        obj = Atendimento(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
-        AtendimentoDAO().atualizar(obj)
-    @staticmethod
-    def atendimento_excluir(id):
-        AtendimentoDAO().excluir(id)
+    @classmethod
+    def cliente_listar(cls):
+        return []
+
+    @classmethod
+    def cliente_listar_id(cls, id):
+        return None
+
+    @classmethod
+    def servico_listar(cls):
+        return []
+
+    @classmethod
+    def servico_listar_id(cls, id):
+        return None
+
+    @classmethod
+    def servico_inserir(cls, descr, valor):
+        pass
+
+    @classmethod
+    def servico_atualizar(cls, id, descr, valor):
+        pass
+
+    @classmethod
+    def servico_excluir(cls, id):
+        pass
+
+    @classmethod
+    def profissional_listar(cls):
+        return []
+
+    @classmethod
+    def profissional_inserir(cls, nome, email, especialidade):
+        pass
+
+    @classmethod
+    def profissional_atualizar(cls, id, nome, email, especialidade):
+        pass
+
+    @classmethod
+    def profissional_excluir(cls, id):
+        pass
+
+    @classmethod
+    def horario_inserir(cls, data, confirmado, id_cliente, id_servico):
+        obj = Horario(0, data)
+        obj.set_confirmado(confirmado)
+        if id_cliente != None: obj.set_id_cliente(id_cliente)
+        if id_servico != None: obj.set_id_servico(id_servico)
+        cls.__horario_dao.inserir(obj)
+
+    @classmethod
+    def horario_listar(cls):
+        return cls.__horario_dao.listar()
+
+    @classmethod
+    def horario_listar_id(cls, id):
+        return cls.__horario_dao.listar_id(id)
+
+    @classmethod
+    def horario_atualizar(cls, id, data, confirmado, id_cliente, id_servico):
+        obj = Horario(id, data)
+        obj.set_confirmado(confirmado)
+        if id_cliente != None: obj.set_id_cliente(id_cliente)
+        if id_servico != None: obj.set_id_servico(id_servico)
+        cls.__horario_dao.atualizar(obj)
+
+    @classmethod
+    def horario_excluir(cls, id):
+        cls.__horario_dao.excluir(id)
