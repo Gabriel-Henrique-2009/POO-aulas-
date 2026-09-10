@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 1,
+    "data": "10/09/2026 09:41",
+    "queixa_principal": "dor nas costas",
+    "historico_saude": "sem nenhum hist\u00f3rico",
+    "avaliacao": "tudo certo",
+    "prescricao": "ibuprofeno",
+    "id_horario": 1
+  }
+]
