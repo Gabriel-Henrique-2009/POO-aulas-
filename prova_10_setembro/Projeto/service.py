@@ -5,8 +5,8 @@ from models.conveniodao import ConvenioDAO
 
 class Service:
     @staticmethod
-    def cliente_inserir(nome, email, fone):
-        obj = Cliente(0, nome, email, fone)
+    def cliente_inserir(nome, email, fone, id_convenio):
+        obj = Cliente(0, nome, email, fone, id_convenio)
         ClienteDAO().inserir(obj)
     @staticmethod
     def cliente_listar():
@@ -15,16 +15,14 @@ class Service:
     def cliente_listar_id(id):
         return ClienteDAO().listar_id(id)
     @staticmethod
-    def cliente_atualizar(id, nome, email, fone):
-        obj = Cliente(id, nome, email, fone)
+    def cliente_atualizar(id, nome, email, fone, id_convenio):
+        obj = Cliente(id, nome, email, fone, id_convenio)
         ClienteDAO().atualizar(obj)
     @staticmethod
     def cliente_excluir(id):
         ClienteDAO().excluir(id)
 
-
-
-
+    @staticmethod
     def convenio_inserir(nome, contato, fone):
         obj = Convenio(0, nome, contato, fone)
         ConvenioDAO().inserir(obj)
@@ -41,9 +39,3 @@ class Service:
     @staticmethod
     def convenio_excluir(id):
         ConvenioDAO().excluir(id)
-
-
-
-
-
-    

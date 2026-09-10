@@ -1,10 +1,9 @@
 class Cliente:
-    def __init__(self, id, nome, email, fone, id_convenio):
+    def __init__(self, id, nome, email, fone):
         self.set_id(id)
         self.set_nome(nome)
         self.set_email(email)
         self.set_fone(fone)
-        self.set_id_convenio(id_convenio)
     
     def set_id(self, id):
         if id < 0: raise ValueError("Id deve ser positivo")
@@ -18,24 +17,18 @@ class Cliente:
     def set_fone(self, fone):
         if fone == "": raise ValueError("Fone deve ser informado")
         self.__fone = fone
-    def set_id_convenio(self, id_convenio):
-        id_convenio = int(id_convenio)
-        if id_convenio < 0: raise ValueError("id do convenio deve ser positivo")
-        self.__id_convenio = id_convenio
-
 
     def get_id(self) : return self.__id
     def get_nome(self) : return self.__nome
     def get_email(self) : return self.__email
     def get_fone(self) : return self.__fone
-    def get_id_convenio(self) : return self.__id_convenio
 
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__id_convenio}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
     
     def to_json(self):
-        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone, "id_convenio":self.__id_convenio }
+        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone }
     
     @staticmethod
     def from_json(dic):
-        return Cliente(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["id_convenio"])
+        return Cliente(dic["id"], dic["nome"], dic["email"], dic["fone"])

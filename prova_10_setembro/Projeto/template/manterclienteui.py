@@ -22,23 +22,40 @@ class ManterClienteUI:
     def inserir():
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
-        fone = st.text_input("Informe o fone")
-        if st.button("Inserir"):
-            Service.cliente_inserir(nome, email, fone)
-            st.success("Cliente inserido com sucesso")
-            time.sleep(2)
-            st.rerun()
+        fone = st.text_input("Informe o fone")    
+        convenios = Service.convenio_listar()
+        if len(convenios) == 0:
+            st.write("Cadastre um convênio")
+        else:
+            convenio = st.selectbox("Convênios: ", convenios)
+            if st.button("Inserir"):
+                id_convenio = int(convenio.get_id())
+                Service.cliente_inserir(nome, email, fone, id_convenio)
+                st.success("Cliente inserido com sucesso")
+                time.sleep(2)
+                st.rerun()
+
     def atualizar():
         clientes = Service.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        convenios = Service.convenio_listar()
+        if len(clientes) == 0: 
+            st.write("Nenhum cliente cadastrado")
+        elif len(convenios) == 0:
+            st.write("Nenhum convênio cadastrado")
         else:
             op = st.selectbox("Atualização de Clientes", clientes)
             nome = st.text_input("Novo nome", op.get_nome())
             email = st.text_input("Novo e-mail", op.get_email())
-            fone = st.text_input("Novo fone", op.get_fone())
+            fone = st.text_input("Novo fone", op.get_fone())    
+            id_c = 0
+            convenio_atual = Service.convenio_listar_id(op.get_id_convenio())
+            if convenio_atual in convenios:
+                id_c = convenios.index(convenio_atual)
+            convenio = st.selectbox("Novo Convênio", convenios, index=id_c)
             if st.button("Atualizar"):
-                id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, fone)
+                id_cliente = op.get_id()
+                id_convenio = int(convenio.get_id())
+                Service.cliente_atualizar(id_cliente, nome, email, fone, id_convenio)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
