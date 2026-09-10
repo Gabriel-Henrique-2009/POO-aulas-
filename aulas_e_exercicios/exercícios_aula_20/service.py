@@ -1,7 +1,7 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDao
-from models.servico import Servico
-from models.servicodao import ServicoDao
+from aulas_e_exercicios.exercícios_aula_20.models.cliente import Cliente
+from aulas_e_exercicios.exercícios_aula_20.models.clientedao import ClienteDao
+from aulas_e_exercicios.exercícios_aula_20.models.servico import Servico
+from aulas_e_exercicios.exercícios_aula_20.models.servicodao import ServicoDao
 
 class Service:
     @staticmethod

@@ -1,5 +1,5 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDao
+from aulas_e_exercicios.exercícios_aula_18.models.cliente import Cliente
+from aulas_e_exercicios.exercícios_aula_18.models.clientedao import ClienteDao
 class Service:
     @staticmethod
     def cliente_inserir(id, nome, email, fone):

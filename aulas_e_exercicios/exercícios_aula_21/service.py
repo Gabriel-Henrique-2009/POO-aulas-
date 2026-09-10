@@ -1,9 +1,9 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDao
-from models.servico import Servico
-from models.servicodao import ServicoDao
-from models.profissional import Profissional
-from models.profissionaldao import ProfissionalDao
+from aulas_e_exercicios.exercícios_aula_21.models.cliente import Cliente
+from aulas_e_exercicios.exercícios_aula_21.models.clientedao import ClienteDao
+from aulas_e_exercicios.exercícios_aula_21.models.servico import Servico
+from aulas_e_exercicios.exercícios_aula_21.models.servicodao import ServicoDao
+from aulas_e_exercicios.exercícios_aula_21.models.profissional import Profissional
+from aulas_e_exercicios.exercícios_aula_21.models.profissionaldao import ProfissionalDao
 
 class Service:
     @staticmethod

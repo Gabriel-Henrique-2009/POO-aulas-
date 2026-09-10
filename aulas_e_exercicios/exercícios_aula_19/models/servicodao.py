@@ -1,17 +1,13 @@
-from models.cliente import Cliente
+from aulas_e_exercicios.exercícios_aula_19.models.servico import Servico
 import json
 
-class ClienteDao:
+class ServicoDao:
     def __init__(self):
-        self.__arquivo = "clientes.json"
+        self.__arquivo = "servicos.json"
         self.__objetos = []
         self.__abrir()
-    
+
     def inserir(self, obj):
-        novo_id = 1
-        if len(self.__objetos) > 0:
-            novo_id = max(x.get_id() for x in self.__objetos) + 1
-        obj.set_id(novo_id)
         self.__objetos.append(obj)
         self.__salvar()
 
@@ -22,13 +18,6 @@ class ClienteDao:
         for obj in self.__objetos:
             if obj.get_id() == id: return obj
         return None
-
-    def listar_nome(self, iniciais):
-        resultado = []
-        for obj in self.__objetos:
-            if obj.get_nome().lower().startswith(iniciais.lower()):
-                resultado.append(obj)
-        return resultado
 
     def atualizar(self, obj):
         aux = self.listar_id(obj.get_id())
@@ -44,18 +33,18 @@ class ClienteDao:
             self.__salvar()
 
     def __abrir(self):
-        try: 
+        try:
             arquivo = open(self.__arquivo, mode="r")
             list_dic = json.load(arquivo)
             arquivo.close()
             self.__objetos = []
             for dic in list_dic:
-                obj = Cliente.from_json(dic)
+                obj = Servico.from_json(dic)
                 self.__objetos.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):
         arquivo = open(self.__arquivo, mode="w")
-        json.dump(self.__objetos, arquivo, default=Cliente.to_json, indent=2)
+        json.dump(self.__objetos, arquivo, default=Servico.to_json, indent=2)
         arquivo.close()

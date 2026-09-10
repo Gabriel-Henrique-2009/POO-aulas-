@@ -1,4 +1,4 @@
-from service import Service
+from aulas_e_exercicios.exercícios_aula_18.service import Service
 class UI:
     @staticmethod
     def main():

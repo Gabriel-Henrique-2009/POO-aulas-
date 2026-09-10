@@ -1,5 +1,5 @@
-from models.servico import Servico
-from models.servicodao import ServicoDao
+from aulas_e_exercicios.exercícios_aula_19.models.servico import Servico
+from aulas_e_exercicios.exercícios_aula_19.models.servicodao import ServicoDao
 
 class Service:
     @staticmethod

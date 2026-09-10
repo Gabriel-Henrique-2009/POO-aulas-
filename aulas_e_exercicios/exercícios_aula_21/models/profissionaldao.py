@@ -1,12 +1,12 @@
-from models.horario import Horario
+from aulas_e_exercicios.exercícios_aula_21.models.profissional import Profissional
 import json
 
-class HorarioDao:
+class ProfissionalDao:
     def __init__(self):
-        self.__arquivo = "horario.json"
+        self.__arquivo = "profissionais.json"
         self.__objetos = []
         self.__abrir()
-    
+
     def inserir(self, obj):
         novo_id = 1
         if len(self.__objetos) > 0:
@@ -23,6 +23,13 @@ class HorarioDao:
             if obj.get_id() == id: return obj
         return None
 
+    def listar_nome(self, iniciais):
+        resultado = []
+        for obj in self.__objetos:
+            if obj.get_nome().lower().startswith(iniciais.lower()):
+                resultado.append(obj)
+        return resultado
+
     def atualizar(self, obj):
         aux = self.listar_id(obj.get_id())
         if aux != None:
@@ -37,18 +44,18 @@ class HorarioDao:
             self.__salvar()
 
     def __abrir(self):
-        try: 
+        try:
             arquivo = open(self.__arquivo, mode="r")
             list_dic = json.load(arquivo)
             arquivo.close()
             self.__objetos = []
             for dic in list_dic:
-                obj = Horario.from_json(dic)
+                obj = Profissional.from_json(dic)
                 self.__objetos.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):
         arquivo = open(self.__arquivo, mode="w")
-        json.dump(self.__objetos, arquivo, default=Horario.to_json, indent=2)
+        json.dump(self.__objetos, arquivo, default=Profissional.to_json, indent=2)
         arquivo.close()
