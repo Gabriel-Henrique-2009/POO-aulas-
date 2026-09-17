@@ -16,15 +16,16 @@ class ManterClienteUI:
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
         else:
             list_dic = []
-            for obj in clientes: list_dic.append(obj.to_json())
+            for obj in clientes: list_dic.append(obj.to_dict())
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
     def inserir():
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
+        senha = st.text_input("Informe a senha", type="password")
         if st.button("Inserir"):
-            Service.cliente_inserir(nome, email, fone)
+            Service.cliente_inserir(nome, email, fone, senha)
             st.success("Cliente inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -36,9 +37,10 @@ class ManterClienteUI:
             nome = st.text_input("Novo nome", op.get_nome())
             email = st.text_input("Novo e-mail", op.get_email())
             fone = st.text_input("Novo fone", op.get_fone())
+            senha = st.text_input("Nova senha", op.get_senha(), type="password")
             if st.button("Atualizar"):
                 id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, fone)
+                Service.cliente_atualizar(id, nome, email, fone, senha)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()

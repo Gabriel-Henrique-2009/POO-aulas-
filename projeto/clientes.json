@@ -3,6 +3,21 @@
     "id": 5,
     "nome": "Gabriel",
     "email": "pedrosa.henrique.gabriel@gmail.com",
-    "fone": "84996882863"
+    "fone": "84996882863",
+    "senha": "12345"
+  },
+  {
+    "id": 6,
+    "nome": "admin",
+    "email": "admin",
+    "fone": "fone",
+    "senha": "1234"
+  },
+  {
+    "id": 7,
+    "nome": "gg",
+    "email": "gg@gmail.com",
+    "fone": "3142536475",
+    "senha": "134679"
   }
 ]
