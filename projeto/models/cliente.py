@@ -19,8 +19,13 @@ class Cliente:
         if fone == "": raise ValueError("Fone deve ser informado")
         self.__fone = fone
     def set_senha(self, senha):
+<<<<<<< HEAD
         if senha == "": raise ValueError("Senha deve ser informada")
         self.__senha = senha
+=======
+            if senha == "": raise ValueError("Senha deve serinformada")
+            self.__senha = senha
+>>>>>>> 2c5801a89ed38f51c54673a5e28a78ab3273ebcc
 
     def get_id(self) : return self.__id
     def get_nome(self) : return self.__nome
@@ -29,13 +34,22 @@ class Cliente:
     def get_senha(self) : return self.__senha
 
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__senha}"
     
+<<<<<<< HEAD
     def to_dict(self):
         return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone }
 
     def to_json(self):
         return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone, "senha":self.__senha }
+=======
+    def to_json(self):
+        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone, "senha":self.__senha}
+    
+    def to_dict(self):
+            return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone}
+        
+>>>>>>> 2c5801a89ed38f51c54673a5e28a78ab3273ebcc
     
     @staticmethod
     def from_json(dic):

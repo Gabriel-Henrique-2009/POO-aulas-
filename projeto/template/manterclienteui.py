@@ -37,7 +37,11 @@ class ManterClienteUI:
             nome = st.text_input("Novo nome", op.get_nome())
             email = st.text_input("Novo e-mail", op.get_email())
             fone = st.text_input("Novo fone", op.get_fone())
+<<<<<<< HEAD
             senha = st.text_input("Nova senha", op.get_senha(), type="password")
+=======
+            senha = st.text_input("Nova senha", op.get_fone(), type="password")
+>>>>>>> 2c5801a89ed38f51c54673a5e28a78ab3273ebcc
             if st.button("Atualizar"):
                 id = op.get_id()
                 Service.cliente_atualizar(id, nome, email, fone, senha)
