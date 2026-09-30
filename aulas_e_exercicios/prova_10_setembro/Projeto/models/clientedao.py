@@ -1,4 +1,4 @@
-from models.cliente import Cliente
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.cliente import Cliente
 import json
 
 class ClienteDAO:

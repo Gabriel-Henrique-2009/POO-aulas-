@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import time
-from service import Service
+from aulas_e_exercicios.prova_10_setembro.Projeto.service import Service
 
 class ManterConvenioUI:
     def main():

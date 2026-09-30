@@ -1,4 +1,4 @@
-from models.convenio import Convenio
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.convenio import Convenio
 import json
 
 class ConvenioDAO:

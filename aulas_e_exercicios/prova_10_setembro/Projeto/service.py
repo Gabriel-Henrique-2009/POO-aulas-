@@ -1,7 +1,7 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDAO
-from models.convenio import Convenio
-from models.conveniodao import ConvenioDAO
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.cliente import Cliente
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.clientedao import ClienteDAO
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.convenio import Convenio
+from aulas_e_exercicios.prova_10_setembro.Projeto.models.conveniodao import ConvenioDAO
 
 class Service:
     @staticmethod

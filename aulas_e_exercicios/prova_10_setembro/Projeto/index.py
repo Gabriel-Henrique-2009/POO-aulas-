@@ -1,6 +1,6 @@
 import streamlit as st
-from template.manterclienteui import ManterClienteUI
-from template.manterconvenioui import ManterConvenioUI
+from aulas_e_exercicios.prova_10_setembro.Projeto.template.manterclienteui import ManterClienteUI
+from aulas_e_exercicios.prova_10_setembro.Projeto.template.manterconvenioui import ManterConvenioUI
 
 class IndexUI:
     @staticmethod
