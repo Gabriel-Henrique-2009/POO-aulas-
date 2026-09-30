@@ -13,4 +13,8 @@ class AbrirContaUI:
             Service.cliente_inserir(nome, email, fone, senha)
             st.success("Conta criada com sucesso")
             time.sleep(2)
+<<<<<<< HEAD:project/templates/abrircontaui.py
             st.rerun
+=======
+            st.rerun()
+>>>>>>> 31c8cc3b7314c0a3b2278132d4836a676cd99c5b:projeto/template/abrircontaui.py

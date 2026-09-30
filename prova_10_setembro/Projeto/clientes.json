@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nome": "GG",
+    "email": "pedrosa@gmail.com",
+    "fone": "84333666999",
+    "id_convenio": 1
+  },
+  {
+    "id": 2,
+    "nome": "Gh",
+    "email": "pedrosa@gmail.com",
+    "fone": "84333666999",
+    "id_convenio": 1
+  },
+  {
+    "id": 3,
+    "nome": "fdasfasfdasfda",
+    "email": "sfdasfdasfda",
+    "fone": "446544444654444465",
+    "id_convenio": 2
+  }
+]

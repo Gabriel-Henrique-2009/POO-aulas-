@@ -39,7 +39,10 @@ class Service:
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id": c.get_id(), "nome": c.get_nome()}
         return None
+<<<<<<< HEAD:project/service.py
 
+=======
+>>>>>>> 31c8cc3b7314c0a3b2278132d4836a676cd99c5b:projeto/service.py
 
     @staticmethod
     def servico_inserir(descricao, valor):
@@ -100,6 +103,10 @@ class Service:
         HorarioDAO().excluir(id)
 
 
+<<<<<<< HEAD:project/service.py
+=======
+
+>>>>>>> 31c8cc3b7314c0a3b2278132d4836a676cd99c5b:projeto/service.py
     @staticmethod
     def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
         obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
@@ -117,6 +124,7 @@ class Service:
     @staticmethod
     def atendimento_excluir(id):
         AtendimentoDAO().excluir(id)
+<<<<<<< HEAD:project/service.py
 
 
     @staticmethod
@@ -141,4 +149,10 @@ class Service:
         for c in Service.profissional_listar():
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id": c.get_id(), "nome": c.get_nome()}
+=======
+    @staticmethod
+    def cliente_autenticar(email, senha):
+        for c in Service.cliente_listar:
+            if c.get_email == email and c.get_senha == senha: return {"id": c.get_id(), "nome": c.get_nome()}
+>>>>>>> 31c8cc3b7314c0a3b2278132d4836a676cd99c5b:projeto/service.py
         return None
