@@ -89,6 +89,7 @@ class IndexUI:
     def main():
         Service.cliente_criar_admin()
         IndexUI.sidebar()
+        
 
 if __name__ == "__main__":
     IndexUI.main()
