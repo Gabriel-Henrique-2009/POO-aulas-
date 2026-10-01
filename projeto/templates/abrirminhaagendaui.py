@@ -3,6 +3,7 @@ import time
 from service import Service
 
 class AbrirMinhaAgendaUI:
+    @staticmethod
     def main():
         st.header("Abrir Minha Agenda")
         
@@ -15,5 +16,5 @@ class AbrirMinhaAgendaUI:
             id_prof = st.session_state["usuario_id"]
             Service.horario_abrir_minha_agenda(data, horario_inicio, horario_fim, intervalo, id_prof)
             st.success("Agenda aberta com sucesso!")
-            time.sleep(2)
+            time.sleep(1.5)
             st.rerun()

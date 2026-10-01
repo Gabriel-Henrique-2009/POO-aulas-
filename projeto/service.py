@@ -9,11 +9,65 @@ from models.profissional import Profissional
 from models.profissionaldao import ProfissionalDAO
 
 class Service:
+    # --- MÉTODOS DE CLIENTE ---
+    @staticmethod
+    def cliente_listar():
+        return ClienteDAO().listar()
+
+    @staticmethod
+    def cliente_listar_id(id):
+        return ClienteDAO().listar_id(id)
+
+    @staticmethod
+    def cliente_inserir(nome, email, fone, senha):
+        c = Cliente(0, nome, email, fone, senha)
+        ClienteDAO().inserir(c)
+
+    @staticmethod
+    def cliente_criar_admin():
+        clientes = Service.cliente_listar()
+        for c in clientes:
+            if c.get_email() == "admin":
+                return
+        Service.cliente_inserir("admin", "admin", "00000000", "1234")
+
+    # --- MÉTODOS DE PROFISSIONAL ---
+    @staticmethod
+    def profissional_listar():
+        return ProfissionalDAO().listar()
+
+    @staticmethod
+    def profissional_listar_id(id):
+        return ProfissionalDAO().listar_id(id)
+
+    # --- MÉTODOS DE SERVIÇO ---
+    @staticmethod
+    def servico_listar():
+        return ServicoDAO().listar()
+
+    @staticmethod
+    def servico_listar_id(id):
+        return ServicoDAO().listar_id(id)
+
+    # --- MÉTODOS DE HORÁRIO ---
+    @staticmethod
+    def horario_listar():
+        return HorarioDAO().listar()
+
+    @staticmethod
+    def horario_listar_id(id):
+        return HorarioDAO().listar_id(id)
+
+    @staticmethod
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
+        h = Horario(0, data, confirmado, id_cliente, id_servico, id_profissional)
+        HorarioDAO().inserir(h)
+
     # --- TAREFA 1: ABRIR MINHA AGENDA ---
     @staticmethod
     def horario_abrir_minha_agenda(data, horario_inicio, horario_fim, intervalo, id_profissional):
-        data_inicio = datetime.strptime(data + " " + horario_inicio, "%d/%m/%Y %H:%M")
-        data_fim = datetime.strptime(data + " " + horario_fim, "%d/%m/%Y %H:%M")
+        data_inicio = datetime.strptime(f"{data} {horario_inicio}", "%d/%m/%Y %H:%M")
+        data_fim = datetime.strptime(f"{data} {horario_fim}", "%d/%m/%Y %H:%M")
         delta = timedelta(minutes=int(intervalo))
         
         x = data_inicio
@@ -25,19 +79,17 @@ class Service:
     @staticmethod
     def horario_listar_agenda_profissional(id_profissional):
         agenda = []
-        todos_horarios = Service.horario_listar()
-        
-        for h in todos_horarios:
+        for h in Service.horario_listar():
             if h.get_id_profissional() == id_profissional:
-                cliente = Service.cliente_listar_id(h.get_id_cliente()) if h.get_id_cliente() else None
-                servico = Service.servico_listar_id(h.get_id_servico()) if h.get_id_servico() else None
+                cli = Service.cliente_listar_id(h.get_id_cliente()) if h.get_id_cliente() else None
+                srv = Service.servico_listar_id(h.get_id_servico()) if h.get_id_servico() else None
                 
                 agenda.append({
                     "id": h.get_id(),
                     "data": h.get_data().strftime("%Y-%m-%d %H:%M:%S") if isinstance(h.get_data(), datetime) else str(h.get_data()),
                     "confirmado": h.get_confirmado(),
-                    "cliente": cliente.get_nome() if cliente else "Nenhum",
-                    "servico": servico.get_descricao() if servico else "Nenhum"
+                    "cliente": cli.get_nome() if cli else "Nenhum",
+                    "servico": srv.get_descricao() if srv else "Nenhum"
                 })
         return agenda
 
@@ -45,28 +97,25 @@ class Service:
     @staticmethod
     def horario_listar_servicos_cliente(id_cliente):
         servicos = []
-        todos_horarios = Service.horario_listar()
-        
-        for h in todos_horarios:
+        for h in Service.horario_listar():
             if h.get_id_cliente() == id_cliente:
-                profissional = Service.profissional_listar_id(h.get_id_profissional()) if h.get_id_profissional() else None
-                servico = Service.servico_listar_id(h.get_id_servico()) if h.get_id_servico() else None
+                prof = Service.profissional_listar_id(h.get_id_profissional()) if h.get_id_profissional() else None
+                srv = Service.servico_listar_id(h.get_id_servico()) if h.get_id_servico() else None
                 
                 servicos.append({
                     "id": h.get_id(),
                     "data": h.get_data().strftime("%Y-%m-%d %H:%M:%S") if isinstance(h.get_data(), datetime) else str(h.get_data()),
                     "confirmado": h.get_confirmado(),
-                    "servico": servico.get_descricao() if servico else "Não definido",
-                    "profissional": profissional.get_nome() if profissional else "Não definido"
+                    "servico": srv.get_descricao() if srv else "Não definido",
+                    "profissional": prof.get_nome() if prof else "Não definido"
                 })
         return servicos
 
-    # --- TAREFA 4: CONFIRMAR SERVIÇO (PROFISSIONAL) ---
+    # --- TAREFA 4: CONFIRMAR SERVIÇO ---
     @staticmethod
     def horario_listar_pendentes_profissional(id_profissional):
-        horarios = Service.horario_listar()
         return [
-            h for h in horarios 
+            h for h in Service.horario_listar() 
             if h.get_id_profissional() == id_profissional 
             and h.get_id_cliente() is not None 
             and not h.get_confirmado()
