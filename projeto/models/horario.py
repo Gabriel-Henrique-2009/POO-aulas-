@@ -41,3 +41,4 @@ class Horario:
         horario.set_id_servico(dic["id_servico"])
         horario.set_id_profissional(dic["id_profissional"])
         return horario
+    

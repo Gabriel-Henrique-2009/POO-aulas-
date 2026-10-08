@@ -1,29 +1,23 @@
 import streamlit as st
-import time
+import pandas as pd
 from service import Service
+import time
+from datetime import datetime
 
 class ConfirmarServicoUI:
-    @staticmethod
     def main():
         st.header("Confirmar Serviço")
-        id_prof = st.session_state["usuario_id"]
-        pendentes = Service.horario_listar_pendentes_profissional(id_prof)
-
-        if not pendentes:
-            st.info("Não há serviços pendentes de confirmação.")
+        horarios = Service.horario_confirmar_servico(st.session_state["usuario_id"])
+        if len(horarios) == 0: st.write("Nenhum horário cadastrado")
         else:
-            dict_opcoes = {}
-            for h in pendentes:
-                cli = Service.cliente_listar_id(h.get_id_cliente())
-                info_cli = f"{cli.get_id()} - {cli.get_nome()} - {cli.get_email()}" if cli else "Desconhecido"
-                label = f"{h.get_id()} - {h.get_data()} - {h.get_confirmado()} ({info_cli})"
-                dict_opcoes[label] = h.get_id()
-
-            selecionado = st.selectbox("Informe o horário", list(dict_opcoes.keys()))
-
+            clientes = Service.cliente_listar()
+            op = st.selectbox("Informe o horário", horarios)
+            id_cliente = None if op.get_id_cliente() in [0, None] else op.get_id_cliente()
+            cliente = st.selectbox("Informe o novo cliente", clientes, next((i for i, c in enumerate(clientes) if c.get_id() == id_cliente), None), disabled = True)
             if st.button("Confirmar"):
-                id_horario = dict_opcoes[selecionado]
-                Service.horario_confirmar(id_horario)
-                st.success("Serviço confirmado com sucesso!")
-                time.sleep(1.5)
+                id_cliente = None
+                if cliente != None: id_cliente = cliente.get_id()
+                Service.horario_atualizar(op.get_id(), op.get_data(), True, id_cliente, op.get_id_servico(), op.get_id_profissional())
+                st.success("Horário confirmado com sucesso")
+                time.sleep(2)
                 st.rerun()

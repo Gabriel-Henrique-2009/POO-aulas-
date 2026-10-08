@@ -3,14 +3,21 @@ import pandas as pd
 from service import Service
 
 class VisualizarMinhaAgendaUI:
-    @staticmethod
     def main():
         st.header("Minha Agenda")
-        id_prof = st.session_state["usuario_id"]
-        agenda = Service.horario_listar_agenda_profissional(id_prof)
-        
-        if not agenda:
-            st.info("Nenhum horário cadastrado na sua agenda.")
+        horarios = Service.horario_visualizar_minha_agenda(st.session_state["usuario_id"])
+        if len(horarios) == 0: st.write("Nenhum horário cadastrado")
         else:
-            df = pd.DataFrame(agenda)
-            st.dataframe(df, use_container_width=True)
+            dic = []
+            for obj in horarios:
+                cliente = Service.cliente_listar_id(obj.get_id_cliente())
+                servico = Service.servico_listar_id(obj.get_id_servico())
+                profissional = Service.profissional_listar_id(obj.get_id_profissional())
+                if cliente != None: cliente = cliente.get_nome()
+                if servico != None: servico = servico.get_descricao()
+                if profissional != None: profissional = profissional.get_nome()
+                dic.append({"id" : obj.get_id(), "data" : obj.get_data(),
+                "confirmado" : obj.get_confirmado(), "cliente" : cliente,
+                "serviço" : servico, "profissional" : profissional})
+            df = pd.DataFrame(dic) 
+            st.dataframe(df)
