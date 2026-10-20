@@ -1,4 +1,4 @@
-class Atendimento:
+class AtendimentoItem:
     def __init__(self, id, id_atendimento, id_servico, qtd, valor):
         self.set_id(id)
         self.set_id_atendimento(id_atendimento)
@@ -29,5 +29,5 @@ class Atendimento:
 
     @staticmethod
     def from_json(dic):
-        return Atendimento(dic["id"], dic["id_atendimento"], dic["id_servico"],\
+        return AtendimentoItem(dic["id"], dic["id_atendimento"], dic["id_servico"],\
                            dic["qtd"], dic["valor"])

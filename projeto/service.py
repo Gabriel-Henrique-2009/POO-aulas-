@@ -160,6 +160,27 @@ class Service:
 
 
     @staticmethod
+    def atendimento_itens(id_atendimento, id_servico, qtd, valor):
+        obj = Atendimento(0, id_atendimento, id_servico, qtd, valor)
+        AtendimentoDAO().inserir(obj)
+    @staticmethod
+    def atendimento_itens_listar():
+        r = AtendimentoDAO().listar()
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+    @staticmethod
+    def atendimento_itens_id(id):
+        return AtendimentoDAO().listar_id(id)
+    @staticmethod
+    def atendimento_itens_atualizar(id, id_atendimento, id_servico, qtd, valor):
+        obj = Atendimento(id, id_atendimento, id_servico, qtd, valor)
+        AtendimentoDAO().atualizar(obj)
+    @staticmethod
+    def atendimento_itens_excluir(id):
+        AtendimentoDAO().excluir(id)
+
+
+    @staticmethod
     def profissional_inserir(nome, email, especialidade, senha):
         obj = Profissional(0, nome, email, especialidade, senha)
         ProfissionalDAO().inserir(obj)
