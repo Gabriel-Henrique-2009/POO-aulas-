@@ -16,12 +16,14 @@ from templates.admalterarsenhaui import ADMAlterarSenhaUI
 from templates.registraratendimentoui import RegistrarAtendimentoUI
 from templates.pagaratendimentoui import PagarAtendimentoUI
 from templates.totalatendimentosui import TotalAtendimentosUI
+from templates.listaragendaprofissionalui import ListarAgendaProfissionalUI
+from templates.listarhorariosconfirmadoshojeui import ListarHorariosConfirmadosHojeUI
 from service import Service
 import streamlit as st
 
 class IndexUI:
     def menu_admin():
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos", "Alterar senha", "Total de Atendimentos"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos", "Alterar senha", "Total de Atendimentos", "Listar Horarios Confirmados Hoje", "Listar Agenda Prodissional"])
         if op == "Cadastro de Clientes": ManterClienteUI.main()
         if op == "Cadastro de Serviços": ManterServicoUI.main()
         if op == "Cadastro de Horários": ManterHorarioUI.main()
@@ -29,30 +31,45 @@ class IndexUI:
         if op == "Cadastro de Atendimentos": ManterAtendimentoUI.main()
         if op == "Alterar senha": ADMAlterarSenhaUI.main()
         if op == "Total de Atendimentos": TotalAtendimentosUI.main()
+        if op == "Listar Horarios Confirmados Hoje": ListarHorariosConfirmadosHojeUI.main()
+        if op == "Listar Agenda Profissional": ListarAgendaProfissionalUI.main()
+
+    @staticmethod
     def sidebar():
         if "usuario_id" not in st.session_state:
             IndexUI.menu_visitante()
         else:
             admin = st.session_state["usuario_nome"] == "admin"
             st.sidebar.write("Bem-vindo(a), " + st.session_state["usuario_nome"])
-            if admin: IndexUI.menu_admin()
+            if admin: 
+                IndexUI.menu_admin()
             else: 
-                if st.session_state["usuario_tipo"] == "cliente": IndexUI.menu_cliente()
-                elif st.session_state["usuario_tipo"] == "profissional": IndexUI.menu_profissional()
+                if st.session_state["usuario_tipo"] == "cliente": 
+                    IndexUI.menu_cliente()
+                elif st.session_state["usuario_tipo"] == "profissional": 
+                    IndexUI.menu_profissional()
             IndexUI.sair_do_sistema()
+
+    @staticmethod
     def main():
         Service.cliente_criar_admin()
         IndexUI.sidebar()
+
+    @staticmethod
     def menu_visitante():
-        op = st.sidebar.selectbox("Menu", ["Entrar no Sistema","Abrir Conta"])
+        op = st.sidebar.selectbox("Menu", ["Entrar no Sistema", "Abrir Conta"])
         if op == "Entrar no Sistema": LoginUI.main()
         if op == "Abrir Conta": AbrirContaUI.main()
+
+    @staticmethod
     def menu_cliente():
         op = st.sidebar.selectbox("Menu", ["Meus Dados", "Agendar Serviço", "Meus Serviços", "Pagar Atendimento"])
         if op == "Meus Dados": PerfilClienteUI.main()
         if op == "Agendar Serviço": AgendarServicoUI.main()
         if op == "Meus Serviços": VisualizarMeusServicosUI.main()
         if op == "Pagar Atendimento": PagarAtendimentoUI.main()
+
+    @staticmethod
     def menu_profissional():
         op = st.sidebar.selectbox("Menu", ["Meus Dados", "Abrir Agenda", "Minha Agenda", "Confirmar Serviço", "Registrar Atendimento"])
         if op == "Meus Dados": PerfilProfissionalUI.main()
@@ -60,6 +77,8 @@ class IndexUI:
         if op == "Minha Agenda": VisualizarMinhaAgendaUI.main()
         if op == "Confirmar Serviço": ConfirmarServicoUI.main()
         if op == "Registrar Atendimento": RegistrarAtendimentoUI.main()
+
+    @staticmethod
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
             del st.session_state["usuario_id"]
@@ -67,3 +86,5 @@ class IndexUI:
             st.rerun()
 
 IndexUI.main()
+
+

@@ -233,3 +233,47 @@ class Service:
         for p in Service.profissional_listar():
             if p.get_email() == email and p.get_senha() == senha: return {"id": p.get_id(), "nome": p.get_nome()}
         return None
+
+    @staticmethod
+    def horario_confirmados_hoje_listar():
+        hoje_str = datetime.now().strftime("%d/%m/%Y")
+        horarios_hoje = []
+
+        for h in Service.horario_listar():
+            data_h = h.get_data()
+            if (data_h.strftime("%d/%m/%Y") == hoje_str 
+                and h.get_confirmado() 
+                and h.get_id_cliente() not in [0, None]):
+                
+                cliente = Service.cliente_listar_id(h.get_id_cliente())
+                servico = Service.servico_listar_id(h.get_id_servico())
+                profissional = Service.profissional_listar_id(h.get_id_profissional())
+                
+                horarios_hoje.append({
+                    "id": h.get_id(),
+                    "data": data_h.strftime("%d/%m/%Y %H:%M"),
+                    "cliente": cliente.get_nome() if cliente else "Nenhum",
+                    "servico": servico.get_descricao() if servico else "Nenhum",
+                    "profissional": profissional.get_nome() if profissional else "Nenhum"
+                })
+                
+        return horarios_hoje
+
+    @staticmethod
+    def horario_listar_agenda_profissional_admin(id_profissional):
+        agenda = []
+        
+        for h in Service.horario_listar():
+            if h.get_id_profissional() == id_profissional:
+                data_h = h.get_data()
+                cliente = Service.cliente_listar_id(h.get_id_cliente()) if h.get_id_cliente() not in [0, None] else None
+                servico = Service.servico_listar_id(h.get_id_servico()) if h.get_id_servico() not in [0, None] else None
+                
+                agenda.append({
+                    "id": h.get_id(),
+                    "data": data_h.strftime("%d/%m/%Y %H:%M"),
+                    "cliente": cliente.get_nome() if cliente else "Nenhum",
+                    "servico": servico.get_descricao() if servico else "Nenhum"
+                })
+                
+        return agenda
