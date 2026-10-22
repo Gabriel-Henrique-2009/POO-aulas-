@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nome": "Gillbet",
+    "email": "gilgilgil@gmail.com",
+    "especialidade": "Professor de POO",
+    "senha": "pythonlover"
+  },
+  {
+    "id": 2,
+    "nome": "Eduardo",
+    "email": "dudu@gmail.com",
+    "especialidade": "M\u00e9dico cardiologista",
+    "senha": "dudu123"
+  }
+]
