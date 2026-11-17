@@ -1,27 +1,50 @@
+from dao_sql.dao import DAO
 from models.atendimento import Atendimento
-from dao_json.dao import DAO
-import json
 
 class AtendimentoDAO(DAO):
-    def __init__(self):
-        super().__init__("atendimentos.json")
+    @classmethod
+    def inserir(cls, obj):
+        cls.abrir()
+        sql = """
+            INSERT INTO atendimento (data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """
+        cls.execute(sql, (obj.get_data(), obj.get_queixa_principal(), obj.get_historico_saude(), obj.get_avaliacao(), obj.get_prescricao(), obj.get_id_horario()))
+        cls.fechar()
 
-    def _abrir(self):  
-        try:  
-            arquivo = open(self._arquivo, mode = "r")
-            list_dic = json.load(arquivo)
-            arquivo.close()
-            self._objetos = []
-            for dic in list_dic:
-                obj = Atendimento.from_json(dic)
-                self._objetos.append(obj)
-        except FileNotFoundError:
-            pass
+    @classmethod
+    def listar(cls):
+        cls.abrir()
+        sql = "SELECT * FROM atendimento"
+        cursor = cls.execute(sql)
+        rows = cursor.fetchall()
+        objs = [Atendimento(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario) for (id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario) in rows]
+        cls.fechar()
+        return objs
 
-    def _salvar(self):    
-        arquivo = open(self._arquivo, mode = "w")
-        json.dump(self._objetos, arquivo, default = Atendimento.to_json, indent = 2)
-        arquivo.close()
+    @classmethod
+    def listar_id(cls, id):
+        cls.abrir()
+        sql = "SELECT * FROM atendimento WHERE id = ?"
+        cursor = cls.execute(sql, (id,))
+        row = cursor.fetchone()
+        obj = Atendimento(*row) if row else None
+        cls.fechar()
+        return obj
 
+    @classmethod
+    def atualizar(cls, obj):
+        cls.abrir()
+        sql = """
+            UPDATE atendimento SET data=?, queixa_principal=?, historico_saude=?, avaliacao=?, prescricao=?, id_horario=?
+            WHERE id=?
+        """
+        cls.execute(sql, (obj.get_data(), obj.get_queixa_principal(), obj.get_historico_saude(), obj.get_avaliacao(), obj.get_prescricao(), obj.get_id_horario(), obj.get_id()))
+        cls.fechar()
 
-
+    @classmethod
+    def excluir(cls, obj):
+        cls.abrir()
+        sql = "DELETE FROM atendimento WHERE id=?"
+        cls.execute(sql, (obj,))
+        cls.fechar()

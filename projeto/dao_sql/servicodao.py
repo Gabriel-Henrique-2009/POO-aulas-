@@ -1,6 +1,5 @@
 from models.servico import Servico
-from dao_json.dao import DAO
-import json
+from dao_sql.dao import DAO
 
 class ServicoDAO(DAO):
     @classmethod
