@@ -1,5 +1,5 @@
-from models.servico import Servico
 from dao_sql.dao import DAO
+from models.servico import Servico
 
 class ServicoDAO(DAO):
     @classmethod
@@ -7,11 +7,10 @@ class ServicoDAO(DAO):
         cls.abrir()
         sql = """
             INSERT INTO servico (descricao, valor)
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?)
         """
-        cls.execute(sql, (obj.get_nome(), obj.get_email(), obj.get_fone(), obj.get_senha()))
+        cls.execute(sql, (obj.get_descricao(), obj.get_valor()))
         cls.fechar()
-
 
     @classmethod
     def listar(cls):
@@ -19,7 +18,7 @@ class ServicoDAO(DAO):
         sql = "SELECT * FROM servico"
         cursor = cls.execute(sql)
         rows = cursor.fetchall()
-        objs = [Servico(id, nome, email, fone, senha) for (id, nome, email, fone, senha) in rows]
+        objs = [Servico(id, descricao, valor) for (id, descricao, valor) in rows]
         cls.fechar()
         return objs
 
@@ -37,10 +36,10 @@ class ServicoDAO(DAO):
     def atualizar(cls, obj):
         cls.abrir()
         sql = """
-            UPDATE servico SET nome=?, email=?, fone=?, senha=?
+            UPDATE servico SET descricao=?, valor=?
             WHERE id=?
         """
-        cls.execute(sql, (obj.get_nome(), obj.get_email(), obj.get_fone(), obj.get_senha(), obj.get_id()))
+        cls.execute(sql, (obj.get_descricao(), obj.get_valor(), obj.get_id()))
         cls.fechar()
 
     @classmethod

@@ -1,18 +1,16 @@
-from models.profissional import Profissional
 from dao_sql.dao import DAO
+from models.profissional import Profissional
 
 class ProfissionalDAO(DAO):
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
         sql = """
-            INSERT INTO profissional (id, nome, email, especialidade, senha)
+            INSERT INTO profissional (nome, email, especialidade, senha)
             VALUES (?, ?, ?, ?)
         """
         cls.execute(sql, (obj.get_nome(), obj.get_email(), obj.get_especialidade(), obj.get_senha()))
         cls.fechar()
-
-
 
     @classmethod
     def listar(cls):
