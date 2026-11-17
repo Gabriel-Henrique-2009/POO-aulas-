@@ -1,13 +1,13 @@
 from models.cliente import Cliente
-from dao_json.clientedao import ClienteDAO
+from dao_sql.clientedao import ClienteDAO
 from models.servico import Servico
-from dao_json.servicodao import ServicoDAO
+from dao_sql.servicodao import ServicoDAO
 from models.horario import Horario
-from dao_json.horariodao import HorarioDAO
+from dao_sql.horariodao import HorarioDAO
 from models.atendimento import Atendimento
-from dao_json.atendimentodao import AtendimentoDAO
+from dao_sql.atendimentodao import AtendimentoDAO
 from models.profissional import Profissional
-from dao_json.profissionaldao import ProfissionalDAO
+from dao_sql.profissionaldao import ProfissionalDAO
 from datetime import datetime, timedelta
 
 class Service:
