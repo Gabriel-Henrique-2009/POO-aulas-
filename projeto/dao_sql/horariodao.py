@@ -10,14 +10,23 @@ class HorarioDAO(DAO):
         return data
 
     @classmethod
-    def _para_objeto(cls, row):
-        id, data, confirmado, id_cliente, id_servico, id_profissional = row
+    def _para_data(cls, data):
         if isinstance(data, str):
             try:
-                data = datetime.strptime(data, "%d/%m/%Y %H:%M")
+                return datetime.strptime(data, "%d/%m/%Y %H:%M")
             except ValueError:
-                data = datetime.fromisoformat(data)
-        return Horario(id, data, bool(confirmado), id_cliente, id_servico, id_profissional)
+                return datetime.fromisoformat(data)
+        return data
+
+    @classmethod
+    def _para_objeto(cls, row):
+        id, data, confirmado, id_cliente, id_servico, id_profissional = row
+        obj = Horario(id, cls._para_data(data))
+        obj.set_confirmado(bool(confirmado))
+        obj.set_id_cliente(id_cliente)
+        obj.set_id_servico(id_servico)
+        obj.set_id_profissional(id_profissional)
+        return obj
 
     @classmethod
     def inserir(cls, obj):
